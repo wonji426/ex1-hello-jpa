@@ -16,6 +16,9 @@ public class JpaMain {
 
             Member member = new Member();
             member.setUsername("A");
+            String username = member.getUsername();
+            System.out.println("username = " + username);
+
 
             em.persist(member);
 
