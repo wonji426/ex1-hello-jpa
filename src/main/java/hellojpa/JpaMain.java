@@ -14,6 +14,7 @@ public class JpaMain {
 
         try {
 
+            // 생성
             Member member1 = new Member();
             member1.setUsername("A");
             Member member2 = new Member();
@@ -23,6 +24,7 @@ public class JpaMain {
 
             System.out.println("====================");
 
+            //영속
             em.persist(member1);
             em.persist(member2);
             em.persist(member3);
