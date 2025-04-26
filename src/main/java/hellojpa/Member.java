@@ -11,7 +11,7 @@ public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "MEMBER_SEQ_GENERATOR")
+            generator = "MEMBER_SEQ_GENERATOR") //값 자동생성
     private Long id;
 
     @Column(name = "name", nullable = false)
