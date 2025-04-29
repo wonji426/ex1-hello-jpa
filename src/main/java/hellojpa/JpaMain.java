@@ -37,9 +37,9 @@ public class JpaMain {
 
             tx.commit();
         } catch (Exception e) {
-            tx.rollback();
+            tx.rollback();//에러 시 롤백
         } finally {
-            em.close();
+            em.close();//닫기
         }
 
         emf.close();
