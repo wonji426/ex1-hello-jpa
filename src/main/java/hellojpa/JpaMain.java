@@ -36,7 +36,7 @@ public class JpaMain {
 
             System.out.println("====================");
 
-            tx.commit();
+            tx.commit(); //커밋시 SQL문 나감
         } catch (Exception e) {
             tx.rollback();//에러 시 롤백
         } finally {
