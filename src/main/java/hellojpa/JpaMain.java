@@ -13,26 +13,26 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member1 = new Member();
-            member1.setUsername("A");
 
-            Member member2 = new Member();
-            member2.setUsername("B");
+            //저장
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
 
-            Member member3 = new Member();
-            member3.setUsername("C");
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setTeam(team);
+            em.persist(member);
 
-            System.out.println("====================");
+            //강제 호출
+            em.flush();
+            //1차 캐시 비우기
+            em.clear();
 
-            em.persist(member1);
-            em.persist(member2);
-            em.persist(member3);
+            Member findMember = em.find(Member.class, member.getId());
+            Team findTeam = findMember.getTeam();
+            System.out.println("findTeam.Name = " + findTeam.getName());
 
-            System.out.println("member1.Id = " + member1.getId());
-            System.out.println("member2.Id = " + member2.getId());
-            System.out.println("member3.Id = " + member3.getId());
-
-            System.out.println("====================");
 
             tx.commit(); //커밋시 SQL문 나감
         } catch (Exception e) {
