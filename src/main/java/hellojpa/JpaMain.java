@@ -2,8 +2,6 @@ package hellojpa;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 public class JpaMain {
 
     public static void main(String[] args) {
@@ -16,6 +14,19 @@ public class JpaMain {
 
         try {
 
+            Movie movie = new Movie();
+            movie.setDirector("A");
+            movie.setActor("actor");
+            movie.setName("바람과 함께 사라지다");
+            movie.setPrice(10000);
+
+            em.persist(movie);
+
+            em.flush();
+            em.clear();
+
+            Item findMovie = em.find(Item.class, movie.getId());
+            System.out.println("findMovie = " + findMovie);
 
             tx.commit(); //커밋시 SQL문 나감
         } catch (Exception e) {
