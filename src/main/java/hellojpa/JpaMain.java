@@ -1,8 +1,7 @@
 package hellojpa;
 
 import jakarta.persistence.*;
-
-import java.time.LocalDateTime;
+import org.hibernate.Hibernate;
 
 public class JpaMain {
 
@@ -16,18 +15,20 @@ public class JpaMain {
 
         try {
 
-            Member member = new Member();
-            member.setCreatedBy("kis");
-            member.setUsername("kish");
-            member.setCreatedDate(LocalDateTime.now());
-
-            em.persist(member);
+            Member member1 = new Member();
+            member1.setUsername("Jack1");
+            em.persist(member1);
 
             em.flush();
             em.clear();
 
+            Member refMember = em.getReference(Member.class, member1.getId());
+            System.out.println("refMember = " + refMember.getClass()); //Proxy
+            Hibernate.initialize(refMember); //강제 초기화
+
             tx.commit(); //커밋시 SQL문 나감
         } catch (Exception e) {
+            e.printStackTrace();
             tx.rollback();//에러 시 롤백
         } finally {
             em.close();//닫기
