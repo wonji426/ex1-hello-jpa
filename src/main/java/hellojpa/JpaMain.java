@@ -28,7 +28,6 @@ public class JpaMain {
 
             tx.commit(); //커밋시 SQL문 나감
         } catch (Exception e) {
-            e.printStackTrace();
             tx.rollback();//에러 시 롤백
         } finally {
             em.close();//닫기
