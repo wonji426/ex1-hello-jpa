@@ -12,13 +12,17 @@ public class JpaMain {
         tx.begin();
 
         try {
+            Address address = new Address("city", "street", "12345");
 
             Member member = new Member();
-            member.setUsername("Jack");
-            member.setHomeAddress(new Address("city", "street", "12345"));
-            member.setWorkPeriod(new Period());
-
+            member.setUsername("member1");
+            member.setHomeAddress(address);
             em.persist(member);
+
+            Address newAddress = new Address("newCity", address.getStreet(), address.getZipcode());
+            member.setHomeAddress(newAddress);
+
+
 
             tx.commit(); //커밋시 SQL문 나감
         } catch (Exception e) {
