@@ -1,10 +1,6 @@
 package hellojpa;
 
 import jakarta.persistence.*;
-import org.hibernate.Hibernate;
-
-import java.util.List;
-
 public class JpaMain {
 
     public static void main(String[] args) {
@@ -17,25 +13,16 @@ public class JpaMain {
 
         try {
 
-            Child child1 = new Child();
-            Child child2 = new Child();
+            Member member = new Member();
+            member.setUsername("Jack");
+            member.setHomeAddress(new Address("city", "street", "12345"));
+            member.setWorkPeriod(new Period());
 
-            Parent parent = new Parent();
-            parent.addChild(child1);
-            parent.addChild(child2);
-
-            em.persist(parent);
-
-            em.flush();
-            em.clear();
-
-            Parent findParent = em.find(Parent.class, parent.getId());
-            findParent.getChildList().remove(0);
+            em.persist(member);
 
             tx.commit(); //커밋시 SQL문 나감
         } catch (Exception e) {
             tx.rollback();//에러 시 롤백
-            e.printStackTrace();
         } finally {
             em.close();//닫기
         }
